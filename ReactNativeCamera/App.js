@@ -10,7 +10,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native';
 
 import { RNCamera } from "react-native-camera";
@@ -37,9 +38,11 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <RNCamera
-          ref={camera => {this.camera = camera}}
+          ref={camera => {
+            this.camera = camera
+          }}
           style = {styles.preview}
-          type={RNCamera.Constants.Type.back}
+          type={RNCamera.Constants.Type.front}
           autoFocus={RNCamera.Constants.AutoFocus.on}
           flashMode={RNCamera.Constants.FlashMode.off}
           permissionDialogTitle={'Permission to use camera'}
@@ -48,9 +51,11 @@ export default class App extends React.Component {
         <View style={styles.buttonContainer}>
 
           <TouchableOpacity onPress={this.takePicture} style={styles.capture}>
+            <Image
+              style={styles.buttonImg}
+              source={ require('../ReactNativeCamera/src/img/1_titulo.png')}
+            />
             
-            <Text style={styles.buttonText}> SNAP </Text>
-
           </TouchableOpacity>
 
         </View>
@@ -63,7 +68,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#272526',
   },
 
   preview: {
@@ -80,16 +85,17 @@ const styles = StyleSheet.create({
 
   capture: {
     flex: 0,
-    backgroundColor: '#fff',
+    backgroundColor: 'yellow',
     borderRadius: 5,
-    padding: 15,
-    paddingHorizontal: 20,
+    padding: 10,
+    paddingHorizontal: 15,
     alignSelf: 'center',
     margin: 20,
   },
 
-  buttonText: {
-    fontSize: 14,
+  buttonImg: {
+    width: 50,
+    height:50,
   },
  
 });
