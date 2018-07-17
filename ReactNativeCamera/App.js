@@ -22,7 +22,7 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      data1: '../ReactNativeCamera/src/img/1_titulo.png'
+      data1: './src/img/1_titulo.png'
     }
   }
 
@@ -57,7 +57,7 @@ export default class App extends React.Component {
           <TouchableOpacity onPress={this.takePicture} style={styles.capture}>
             <Image
               style={styles.buttonImg}
-              source={ require('../ReactNativeCamera/src/img/1_titulo.png')}
+              source={ require('./src/img/1_titulo.png')}
             />
             
           </TouchableOpacity>
