@@ -16,21 +16,24 @@ import {
 
 import { RNCamera } from "react-native-camera";
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-
 export default class App extends React.Component {
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      data1: '../ReactNativeCamera/src/img/1_titulo.png'
+    }
+  }
 
   takePicture = async () => {
     if(this.camera){
       const options = { quality: 0.8, base64: true};
       const data = await this.camera.takePictureAsync(options);
-      alert(data.uri);
+      this.setState({
+        data1: data.base64
+      });
+      
     }
   };
 
@@ -47,9 +50,10 @@ export default class App extends React.Component {
           flashMode={RNCamera.Constants.FlashMode.off}
           permissionDialogTitle={'Permission to use camera'}
           permissionDialogMessage={'We need your permission to use your camerra phone'}
-        />
+        />       
+        
         <View style={styles.buttonContainer}>
-
+          
           <TouchableOpacity onPress={this.takePicture} style={styles.capture}>
             <Image
               style={styles.buttonImg}
@@ -58,11 +62,19 @@ export default class App extends React.Component {
             
           </TouchableOpacity>
 
+          <Imagem data={this.state.data1}/>
         </View>
       </View>
     );
   }
+  
 }
+
+const Imagem = (props) => (
+  <View style={styles.mostrar}>    
+    <Image style={styles.buttonImg} source={{uri: `data:image/gif;base64,${props.data}`}} />
+  </View>
+)
 
 const styles = StyleSheet.create({
   container: {
@@ -81,6 +93,16 @@ const styles = StyleSheet.create({
     flex: 0,
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+
+  mostrar: {
+    flex: 0,
+    backgroundColor: 'yellow',
+    borderRadius: 5,
+    padding: 10,
+    paddingHorizontal: 15,
+    //alignSelf: 'center',
+    margin: 20,
   },
 
   capture: {

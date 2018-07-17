@@ -12,3 +12,4 @@ const Counter = (props) => (
  });
 
 export default connect(mapStateToProps)(Counter);
+
