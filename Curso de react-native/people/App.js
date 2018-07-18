@@ -1,39 +1,59 @@
-import React from 'react';
-import { View } from 'react-native';
-import Header from './src/components/header/Header';
+import { 
+    StackNavigator, 
+    createStackNavigator 
+} from 'react-navigation';
 
-import axios from 'axios';
-import PeopleList from './src/components/people-list/PeopleList';
+import PeoplePage from './src/pages/PeoplePage';
+import PeopleDetailPage from './src/components/people-detail-page/PeopleDetailPage';
+// Nova forma de fazer
+const RootStack = createStackNavigator(
+  {
+    Home: PeoplePage,
+    PeopleDetail: PeopleDetailPage,
+  },
+  {
+    initialRouteName: 'Home',
+    navigationOptions: {
+      title: 'Pessoas!',
+      headerStyle: {
+        backgroundColor: '#659df7',
+        borderBottomWidth: 1,
+        borderBottomColor: '#C5C5C5',
+      },
+      headerTitleStyle: {
+        color: 'white',
+        fontSize: 30,
+        textAlign: 'center',
+        flexGrow: 1,
+      },
+    },
+  },
+);
 
 
-export default class App extends React.Component {
+export default RootStack;
 
-  constructor(props){
-    super(props);
-
-    this.state = {
-        peoples: []
-    }
-  }
-
-  componentDidMount(){
-      axios
-          .get('https://randomuser.me/api/?nat=br&results=5')
-          .then(response =>{
-              const { results } = response.data;
-              this.setState({
-                peoples: results
-              })
-          });
-  }
-
-  
-  render() {
-    return (
-      <View>
-        <Header title={'Pessoas!'}/>
-        <PeopleList peoples={this.state.peoples}/>
-      </View>
-    );
-  }
-}
+// Forma velha
+// export default StackNavigator({
+//   'Main': {
+//       screen: PeoplePage
+//   },
+//    'PeopleDetail': {'
+//       screen: PeopleDetailPage
+//   },
+// }, {
+//      navigationOptions: {
+//       title: 'Pessoas!',
+//       headerStyle: {
+//         backgroundColor: '#659df7',
+//         borderBottomWidth: 1,
+//         borderBottomColor: '#C5C5C5',
+//       },
+//       headerTitleStyle: {
+//         color: 'white',
+//         fontSize: 30,
+//         alignSelf: 'center',
+//         //fontWeight: 'bold',
+//       },
+//      }
+//   });

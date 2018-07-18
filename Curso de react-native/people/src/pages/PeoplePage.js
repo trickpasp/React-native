@@ -1,9 +1,13 @@
 import React from 'react';
 import { View } from 'react-native';
-import Header from '../../components/header/Header';
+import Header from '../components/header/Header';
 
 import axios from 'axios';
-import PeopleList from '../../components/people-list/PeopleList';
+import PeopleList from '../components/people-list/PeopleList';
+
+import {
+  createStackNavigator
+} from 'react-navigation';
 
 
 export default class PeoplePage extends React.Component {
@@ -31,7 +35,6 @@ export default class PeoplePage extends React.Component {
   render() {
     return (
       <View>
-        <Header title={'Pessoas!'}/>
         <PeopleList peoples={this.state.peoples}/>
       </View>
     );
