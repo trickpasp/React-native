@@ -1,12 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
-import Header from './src/components/header/Header';
+import Header from '../../components/header/Header';
 
 import axios from 'axios';
-import PeopleList from './src/components/people-list/PeopleList';
+import PeopleList from '../../components/people-list/PeopleList';
 
 
-export default class App extends React.Component {
+export default class PeoplePage extends React.Component {
 
   constructor(props){
     super(props);
