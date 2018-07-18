@@ -1,10 +1,14 @@
+/* 
+  Parte de navegação da página
+*/
+
 import { 
     StackNavigator, 
     createStackNavigator 
 } from 'react-navigation';
 
 import PeoplePage from './src/pages/PeoplePage';
-import PeopleDetailPage from './src/components/people-detail-page/PeopleDetailPage';
+import PeopleDetailPage from './src/pages/people-detail-page/PeopleDetailPage';
 // Nova forma de fazer
 const RootStack = createStackNavigator(
   {
@@ -15,6 +19,7 @@ const RootStack = createStackNavigator(
     initialRouteName: 'Home',
     navigationOptions: {
       title: 'Pessoas!',
+      headerTintColor: 'white',
       headerStyle: {
         backgroundColor: '#659df7',
         borderBottomWidth: 1,

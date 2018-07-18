@@ -6,11 +6,12 @@ import styles from './styles';
 
 const PeopleList = props => {
 
-    const { peoples } = props;
+    const { peoples, onPressItem } = props;
     
     const items = peoples.map(people => <PeopleListItem 
                     key={ people.login.uuid } 
                     people={ people }
+                    navigatioToPeopleDetail={onPressItem}
                 />
     );
 
