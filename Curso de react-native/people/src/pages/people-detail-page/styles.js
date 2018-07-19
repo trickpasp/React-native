@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#e2f9ff',
         elevation: 1,
         borderRadius: 5,
-        marginTop: 20,
+        marginTop: 5,
     },
     
 });
