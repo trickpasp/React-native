@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 
 import axios from 'axios';
 import PeopleList from '../components/people-list/PeopleList';
@@ -18,12 +18,13 @@ export default class PeoplePage extends React.Component {
     this.state = {
         peoples: [],
         loading: false,
+        error: false,
     }
   }
 
   componentDidMount(){
     this.setState({ loading: true});
-    setTimeout(() => {
+    
       axios
           .get('https://randomuser.me/api/?nat=br&results=10')
           .then(response =>{
@@ -31,21 +32,34 @@ export default class PeoplePage extends React.Component {
               this.setState({
                 peoples: results,
                 loading: false,
-              })
+              });
+              console.log("Aqui");
+          }).catch(error => {
+              this.setState({
+                error: true,
+                loading: false,
+              });
           });
-    }, 1500);      
+        
   }
 
   renderPage() {
-    if(this.state.loading)
+    console.log(this.state.error, this.state.loading);
+    if(this.state.loading){
         return <ActivityIndicator size="large" color="#659df7" />;
-    else
-      return <PeopleList 
-                peoples={this.state.peoples}
-                onPressItem={pageParams => {
+    }
+
+    if(this.state.error){
+        return <Text style={styles.error}>Ops... Algo deu errado =(</Text>;
+    }
+    
+    return <PeopleList 
+              peoples={this.state.peoples}
+              onPressItem={pageParams => {
                   this.props.navigation.navigate('PeopleDetail', pageParams);
-                }}
-              />;
+              }}
+            />;     
+    
 
   }
 
@@ -53,10 +67,20 @@ export default class PeoplePage extends React.Component {
   render() {    
     return (
       <View style= {styles.container}>
-        
-        { 
+            
+        {           
           this.renderPage()
-        }
+        }        
+
+        {/* {
+          this.state.loading
+              ? <ActivityIndicator size="large" color="#659df7" />
+              : this.state.error 
+                    ? <Text style={styles.error}>Ops... Algo deu errado =(</Text>
+                    :  <PeopleList peoples={this.state.peoples} onPressItem={pageParams => {
+                      this.props.navigation.navigate('PeopleDetail', pageParams);
+                    }}/>            
+        } */}
         
       </View>
     );
