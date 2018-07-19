@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TextInput, Button } from 'react-native';
+import firebase from 'firebase';
 
 import styles from './styles';
 
@@ -18,6 +19,29 @@ export default class LoginPage extends React.Component {
             password: '',
         }
     }
+
+    componentDidMount()  {
+        const config = {
+            apiKey: "AIzaSyB0pn9JlKBahH_zygVTx1_jwa5tq_mnM4w",
+            authDomain: "series-ba700.firebaseapp.com",
+            databaseURL: "https://series-ba700.firebaseio.com",
+            projectId: "series-ba700",
+            storageBucket: "series-ba700.appspot.com",
+            messagingSenderId: "1093603818170"
+        };
+        firebase.initializeApp(config);
+
+        firebase
+            .auth()
+            .signInWithEmailAndPassword('fernanda@mail.com', '123123')
+            .then(user => {
+                console.log('Usuário autenticado!', user);
+            })
+            .catch(error => {
+                console.log("Usuário não encontrado", error);
+            });
+    }
+    
 
     onChangeHandler(field, value){
         this.setState({
