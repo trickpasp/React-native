@@ -11,7 +11,6 @@ const PeopleListItem = props => {
     const { thumbnail } = people.picture;
     return( 
         <TouchableOpacity onPress={() => {
-            console.log('Clicou em mim!!!', first);
             navigatioToPeopleDetail({ people });
         }}>       
             <View style={styles.line}>
