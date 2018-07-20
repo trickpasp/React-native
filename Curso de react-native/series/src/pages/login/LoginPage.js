@@ -57,6 +57,7 @@ export default class LoginPage extends React.Component {
         const {mail, password} = this.state;
 
         const loginUserSuccess = user => {
+            console.log('Entrei success');
             this.setState({
                 message: 'Success',
                 color: true,
@@ -64,6 +65,7 @@ export default class LoginPage extends React.Component {
         }
 
         const loginUserFalied = error => {
+            console.log(error.code);
             this.setState({
                 message: this.getMessageByErrorCode(error.code),
                  color: false,
@@ -89,10 +91,10 @@ export default class LoginPage extends React.Component {
                                 firebase
                                         .auth()
                                         .createUserWithEmailAndPassword(mail, password)
-                                        .then(loginUserSuccess(user))
-                                        .catch(error => {
-                                            loginUserFalied(error)
-                                        });
+                                        .then(
+                                            loginUserSuccess
+                                        )
+                                        .catch(loginUserFalied);
                             }
                         }],
                         { cancelable: false }
