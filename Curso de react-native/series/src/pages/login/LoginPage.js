@@ -56,12 +56,12 @@ export default class LoginPage extends React.Component {
         this.setState({isLoading: true, message: ''});
         const {mail, password} = this.state;
 
-        const loginUserSuccess = user => {
-            console.log('Entrei success');
+        const loginUserSuccess = user => {            
             this.setState({
                 message: 'Success',
                 color: true,
             });
+            this.props.navigation.navigate('Main');
         }
 
         const loginUserFalied = error => {

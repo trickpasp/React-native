@@ -3,9 +3,11 @@ import {
 } from 'react-navigation';
 
 import LoginPage from './src/pages/login/LoginPage'
+import SeriesPage from './src/pages/series/SeriesPage';
 
 const RootStack = createStackNavigator({
 	Login: LoginPage,
+	Main: SeriesPage,
 }, {
 	initialRouteName: 'Login',
 	navigationOptions: {
