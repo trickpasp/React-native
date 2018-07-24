@@ -1,21 +1,18 @@
 import React from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import { TextInput, StyleSheet } from 'react-native';
 
-const Input = ({onChangeText, value}) => (
-    <View>
-        <TextInput 
-            onChangeText={onChangeText}
-            value={value}
-            style={styles.input}
-        />
-    </View>
+const Input = ({ onChangeText, value }) => (
+	<TextInput
+		style={styles.input}
+		onChangeText={onChangeText}
+		value={value} />
 );
 
 const styles = StyleSheet.create({
-    input: {
-        paddingLeft: 5,
-        paddingBottom: 10,
-    },
+	input: {
+		paddingLeft: 5,
+		paddingBottom: 5,
+	}
 });
 
 export default Input;
