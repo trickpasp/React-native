@@ -20,9 +20,9 @@ class TodoForm extends React.Component {
         });
     }
 
-    onPress(){
-        
+    onPress(){        
         this.props.dispatchAddTodo(this.state.text);
+        this.setState({text: '' });
     }
     
     render() {
@@ -36,7 +36,7 @@ class TodoForm extends React.Component {
                     />
                 </View>
                 <View style={styles.buttonContainer}>
-                    <Button 
+                    <Button                         
                         onPress={() => this.onPress()}
                         title="Add"/>
                 </View>
@@ -51,18 +51,22 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         flex: 4,
+        paddingLeft: 10,
+        paddingRight: 5,
     },
     buttonContainer: {
         flex: 1,
         paddingTop: 5,
-        paddingRight: 10,
-    }
+        paddingRight: 5,
+    },
 });
 
-const mapDispatchToProps = dispatch => {
-	return {
-		dispatchAddTodo: text => dispatch(addTodo(text))
-	}
-}
+// const mapDispatchToProps = dispatch => {
+// 	return {
+// 		dispatchAddTodo: text => dispatch(addTodo(text))
+// 	}
+// }
 
-export default connect(null, mapDispatchToProps)(TodoForm);
+export default connect(null, {
+    dispatchAddTodo: addTodo
+})(TodoForm);

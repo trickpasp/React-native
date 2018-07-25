@@ -9,9 +9,8 @@ const Input = ({ onChangeText, value }) => (
 );
 
 const styles = StyleSheet.create({
-	input: {
+	input: {	
 		paddingLeft: 5,
-		paddingBottom: 5,
 	}
 });
 
