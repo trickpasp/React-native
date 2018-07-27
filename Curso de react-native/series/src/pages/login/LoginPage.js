@@ -59,19 +59,16 @@ class LoginPage extends React.Component {
         const { mail: email, password } = this.state;
 
         this.props.tryLogin({email, password})
-            .then(() => {                
-                if(user){
-                    this.props.navigation.replace('Main');
-                }
+            .then(user => {                
+                if(user)
+                    return this.props.navigation.replace('Main');
+                
                 this.setState({
                     isLoading: false,
                     message: ''
                 });
             })
             .catch(error => {
-                if(error.code === ''){
-
-                }
                 this.setState({isLoading: false, message: this.getMessageByErrorCode(error)});
             });
  
