@@ -1,25 +1,23 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 
 import styles from './styles';
+import SerieCard from '../../components/card/SerieCard';
+import series from '../../../series.json'
 
-export default class SeriesPage extends React.Component {
-    //opções da navegação da página 
-    static navigationOptions = {
-        title: 'Bem vindo!',
-    }
+const SeriesPage = props => (
+    <View>
+        <FlatList 
+            data={series}
+            renderItem={({ item }) =>(
+                <SerieCard 
+                    serie={item}
+                />
+            )}
+            keyExtractor={item => item.id.toString()}
+            numColumns={2}
+        />
+    </View> 
+);
 
-    constructor(props) {
-        super(props);
-        this.state = {  };
-    }
-    render() {
-        return (
-            <View>
-                <Text>
-                    Series Pages
-                </Text>
-            </View> 
-        );
-    }
-}
+export default SeriesPage;
