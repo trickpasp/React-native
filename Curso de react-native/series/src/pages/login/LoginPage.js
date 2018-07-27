@@ -8,12 +8,15 @@ import {
     Alert
 } from 'react-native';
 import firebase from 'firebase';
+import { connect } from 'react-redux';
+
 
 import styles from './styles';
 
 import FormRow from '../../components/form/FormRow';
+import { tryLogin } from '../../actions';
 
-export default class LoginPage extends React.Component {
+class LoginPage extends React.Component {
     //opções da navegação da página 
     static navigationOptions = {
         title: 'Bem vindo!',
@@ -28,7 +31,6 @@ export default class LoginPage extends React.Component {
             password: '',
             isLoagind: false,
             message: '',
-            color: false,
         }
     }
     //comunicação com o banco de dados firebase
@@ -54,66 +56,31 @@ export default class LoginPage extends React.Component {
     //parte de login
     tryLogin(){
         this.setState({isLoading: true, message: ''});
-        const {mail, password} = this.state;
+        const { mail: email, password } = this.state;
 
-        const loginUserSuccess = user => {            
-            this.setState({
-                message: 'Success',
-                color: true,
-            });
-            this.props.navigation.navigate('Main');
-        }
-
-        const loginUserFalied = error => {
-            console.log(error.code);
-            this.setState({
-                message: this.getMessageByErrorCode(error.code),
-                 color: false,
-            });  
-        }
-
-        firebase
-            .auth()
-            .signInWithEmailAndPassword(mail, password)
-            .then(loginUserSuccess)
-            .catch(error => {
-                if(error.code === 'auth/user-not-found'){
-                    Alert.alert(
-                        'Usuário não encontrado!',
-                        'Deseja criar um cadastro com as informações inseridas?',
-                        [{
-                            text: 'Não', 
-                            onPress: () => console.log('Usuário não quer criar conta!'),
-                            style: 'cancel'
-                        },{
-                            text: 'Sim',
-                            onPress: () => {
-                                firebase
-                                        .auth()
-                                        .createUserWithEmailAndPassword(mail, password)
-                                        .then(
-                                            loginUserSuccess
-                                        )
-                                        .catch(loginUserFalied);
-                            }
-                        }],
-                        { cancelable: false }
-                    );
-                    return;
-                }    
-
-                loginUserFalied(error)            
-                
+        this.props.tryLogin({email, password})
+            .then(() => {                
+                if(user){
+                    this.props.navigation.replace('Main');
+                }
+                this.setState({
+                    isLoading: false,
+                    message: ''
+                });
             })
-            .then(() => this.setState({ isLoading: false })); 
+            .catch(error => {
+                if(error.code === ''){
+
+                }
+                this.setState({isLoading: false, message: this.getMessageByErrorCode(error)});
+            });
+ 
     }
 
     getMessageByErrorCode(errorCode){
-        switch(errorCode){            
+        switch(errorCode.code){            
             case 'auth/invalid-email':
                 return 'Email inválido!';
-            case 'auth/user-not-found':
-                return 'Usuário não encontrado!';
             case 'auth/wrong-password':
                 return 'Senha incorreta!';
             default: 
@@ -126,8 +93,8 @@ export default class LoginPage extends React.Component {
         if (!message) 
             return null;
         return (
-            <Text style={[this.state.color ? styles.success: styles.error]}>{ message }</Text>
-        );
+            Alert.alert('Atenção', message, [{text: 'OK', onPress: () => this.setState({isLoading: false, message: '' })}] ) 
+             );
     }
 
     renderButton(){
@@ -171,3 +138,4 @@ export default class LoginPage extends React.Component {
     }
 }
 
+export default connect(null, { tryLogin })(LoginPage);
