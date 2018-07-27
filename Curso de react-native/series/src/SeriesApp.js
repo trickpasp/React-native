@@ -1,13 +1,17 @@
 import React from 'react';
 import Router from './Router';
 
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { devToolsEnhancer } from 'redux-devtools-extension';
+import { createStore, applyMiddleware } from 'redux';
+import reduxThunk from 'redux-thunk';
+
+import { composeWithDevTools } from 'remote-redux-devtools';
 
 import rootReducer from  './reducers';
 
-const store = createStore(rootReducer, devToolsEnhancer());
+const store = createStore(rootReducer, composeWithDevTools(
+    applyMiddleware(reduxThunk),
+));
 
 const SeriesApp = props => (
     <Provider store={store}>
