@@ -7,27 +7,27 @@ import {
 } from 'react-native';
 import styles from './styles';
 
-const SerieCard = ({ serie, isFirstColumn, onNavigate }) => (
+const AddSerieCard = ({ serie, isFirstColumn, onPress }) => (
     <TouchableOpacity 
-        onPress={onNavigate}
+        onPress={onPress}
         style={[
             styles.container, 
             isFirstColumn ? styles.firstColumn: styles.lastColumn
         ]}
     >
         <View style={styles.card}>
-            <Image
+            {/* <Image
                 source={{
                     uri: serie.img
                 }}
                 aspectRatio={1}
                 resizeMode="cover"
-            />
-            <View style={styles.cardTitleWrapper}>                
-                <Text style={styles.cardTitle}>{serie.title}</Text>
+            /> */}
+            <View>
+                <Text>Aqui vai nosso Botão</Text>
             </View>
         </View>        
     </TouchableOpacity>
 );
 
-export default SerieCard;
+export default AddSerieCard;

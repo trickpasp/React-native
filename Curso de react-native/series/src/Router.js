@@ -4,6 +4,7 @@ import {
 
 import LoginPage from './pages/login/LoginPage'
 import SeriesPage from './pages/series/SeriesPage'
+import SerieDetailPage from './pages/series/details/SeriesDetailPage';
 
 export default createStackNavigator(
 	{
@@ -15,6 +16,16 @@ export default createStackNavigator(
 		},
 		'Main': {
 			screen: SeriesPage
+		},
+		'SerieDetail': {
+			screen: SerieDetailPage,
+			navigationOptions: ({ navigation }) => {
+				const { serie } = navigation.state.params;
+				return {
+					title: serie.title,
+				}
+			}
+
 		},
 	}, 
 	{
