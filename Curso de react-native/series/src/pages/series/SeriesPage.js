@@ -4,7 +4,7 @@ import { View, Text, FlatList } from 'react-native';
 import styles from './styles';
 import SerieCard from '../../components/card/SerieCard';
 import series from '../../../series.json'
-import AddSerieCard from '../../components/card/add/AddSerieCard';
+import AddSerieCard from '../../components/card/AddSerieCard';
 
 const isEven = number => number % 2 === 0;
 
@@ -16,6 +16,7 @@ const SeriesPage = props => (
                 item.isLast
                     ?<AddSerieCard 
                         isFirstColumn={isEven(index)}
+                        onPress={() => props.navigation.navigate('SerieForm', )}
                      />
                     :<SerieCard 
                         serie={item}
