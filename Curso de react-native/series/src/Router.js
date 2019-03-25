@@ -2,7 +2,7 @@ import {
 	createStackNavigator
 } from 'react-navigation';
 
-import LoginPage from './pages/login/LoginPage'
+import LoginPage from './pages/LoginPage'
 import SeriesPage from './pages/series/SeriesPage'
 import SerieFormPage from './pages/series/SerieFormPage'
 import SerieDetailPage from './pages/series/SeriesDetailPage'
@@ -44,7 +44,7 @@ export default createStackNavigator(
 		},
 	}, 
 	{
-		initialRouteName: 'SerieForm',
+		initialRouteName: 'Login',
 		navigationOptions: {
 			title: 'Series!',
 			headerTintColor: 'white',
