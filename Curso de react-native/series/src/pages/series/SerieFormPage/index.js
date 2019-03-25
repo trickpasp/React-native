@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { 
     View, 
-    Text, 
     StyleSheet, 
-    TextInput 
+    TextInput,
+    Picker
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -27,7 +27,17 @@ const SerieFormPage = ({ serieForm, setField }) => (
                 placeholder="URL da imagem"
                 value={serieForm.img}
                 onChangeText={value => setField('img', value)}
-            />
+                />
+        </FormRow>
+
+        <FormRow>
+            <Picker
+                selectedValue={serieForm.gender}
+                onValueChange={itemValue => setField('gender', itemValue)}>
+                <Picker.Item label="Policial" value="police" />
+                <Picker.Item label="Comédia" value="comedy" />
+                <Picker.Item label="Terror" value="horror" />
+            </Picker>
         </FormRow>
     </View>
 );
@@ -37,7 +47,7 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
         paddingLeft: 5,
         paddingRight: 5,
-    }
+    },
 });
 
 const mapStateToProps = state => ({
