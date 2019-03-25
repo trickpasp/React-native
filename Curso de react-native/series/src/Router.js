@@ -4,7 +4,8 @@ import {
 
 import LoginPage from './pages/login/LoginPage'
 import SeriesPage from './pages/series/SeriesPage'
-import SerieDetailPage from './pages/series/details/SeriesDetailPage';
+import SerieFormPage from './pages/series/SerieFormPage'
+import SerieDetailPage from './pages/series/SeriesDetailPage'
 
 export default createStackNavigator(
 	{
@@ -15,7 +16,15 @@ export default createStackNavigator(
 			}
 		},
 		'Main': {
-			screen: SeriesPage
+			screen: SeriesPage,
+			navigationOptions: {
+				headerTitleStyle: {
+					color: 'white',
+					fontSize: 30,
+					textAlign: 'center',
+					flexGrow: 1,
+				},
+			}
 		},
 		'SerieDetail': {
 			screen: SerieDetailPage,
@@ -26,6 +35,12 @@ export default createStackNavigator(
 				}
 			}
 
+		},
+		'SerieForm': {
+			screen: SerieFormPage,
+			navigationOptions: {
+				title: 'Nova série',
+			}
 		},
 	}, 
 	{
@@ -41,8 +56,6 @@ export default createStackNavigator(
 			headerTitleStyle: {
 				color: 'white',
 				fontSize: 30,
-				textAlign: 'center',
-				flexGrow: 1,
 			},
 		},
 	}, 
