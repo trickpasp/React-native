@@ -44,7 +44,7 @@ export default createStackNavigator(
 		},
 	}, 
 	{
-		initialRouteName: 'Main',
+		initialRouteName: 'SerieForm',
 		navigationOptions: {
 			title: 'Series!',
 			headerTintColor: 'white',
